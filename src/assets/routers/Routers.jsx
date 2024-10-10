@@ -10,8 +10,8 @@ export const Routers = () => (
       <Route element={<Home />} path="/" />
       <Route element={<Login />} path="/login" />
       <Route element={<Register />} path="/registration" />
-      <Route element={<AddPost />} path="/post/create" />
-      <Route element={<FullPost />} path="/post" />
+      <Route element={<AddPost />} path="/add-post" />
+      <Route element={<FullPost />} path="/posts/:id" />
     </Routes>
   </BrowserRouter>
 );
