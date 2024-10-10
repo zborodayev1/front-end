@@ -1,0 +1,11 @@
+# Ignore artifacts:
+build
+coverage
+package.json
+package-lock.json
+postcss.config.json
+tailwind.config.js
+vite.config.js 
+README.md
+.prettierrc
+eslint.config.json
