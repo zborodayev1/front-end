@@ -6,7 +6,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   return data;
 });
 
-export const fetchTags = createAsyncThunk("posts/fetchTAgs", async () => {
+export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
   const { data } = await axios.get("/tags");
   return data;
 });
@@ -39,7 +39,7 @@ const postsSLice = createSlice({
           return;
         }
         state.posts.items = action.payload;
-        state.posts.status = "loaded"; 
+        state.posts.status = "loaded";
       })
       .addCase(fetchPosts.rejected, (state) => {
         state.posts.items = [];
@@ -56,7 +56,7 @@ const postsSLice = createSlice({
           return;
         }
         state.tags.items = action.payload;
-        state.tags.status = "loaded"; 
+        state.tags.status = "loaded";
       })
       .addCase(fetchTags.rejected, (state) => {
         state.tags.items = [];

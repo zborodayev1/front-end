@@ -27,7 +27,10 @@ $blue: #4361ee;
 }
 
 .image {
-  width: 100%;
+  min-width: 80px;
+  max-width: 800px;
+  min-height: 80px; // wh-80px
+  max-height: 800px;
   height: 300px;
   object-fit: cover;
 

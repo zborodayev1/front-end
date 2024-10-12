@@ -15,10 +15,10 @@ export const Home = () => {
 
   const isPostLoading = posts.status === "loading";
   const isTagsLoading = tags.status === "loading";
- 
+
   useEffect(() => {
-    dispath(fetchPosts()); 
-    dispath(fetchTags()); 
+    dispath(fetchPosts());
+    dispath(fetchTags());
   }, [dispath]);
 
   const renderPosts = () => {
@@ -29,16 +29,15 @@ export const Home = () => {
     }
 
     return posts.items.posts.map((obj, index) => {
-      if (!obj?._id) { 
+      if (!obj?._id) {
         return null;
       }
-
       return (
         <Post
-          id={obj._id}
+          _id={obj._id}
           key={index}
           title={obj.title}
-          imageUrl="https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"
+          imageUrl={obj.imageUrl}
           user={obj.user}
           createdAt={obj.createdAt}
           viewsCount={obj.viewsCount}
@@ -49,7 +48,6 @@ export const Home = () => {
       );
     });
   };
-
   return (
     <div>
       <Header />
@@ -67,10 +65,7 @@ export const Home = () => {
             {renderPosts()}
           </Grid>
           <Grid xs={4} item>
-            <TagsBlock
-              items={tags.items.tags}
-              isLoading={isTagsLoading}
-            />
+            <TagsBlock items={tags.items.tags} isLoading={isTagsLoading} />
             <CommentsBlock
               items={[
                 {

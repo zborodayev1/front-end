@@ -11,7 +11,7 @@ import { PostSkeleton } from "../Post/Skeleton";
 import { Link } from "react-router-dom";
 
 export const Post = ({
-  id,
+  _id,
   title,
   createdAt,
   imageUrl,
@@ -29,7 +29,7 @@ export const Post = ({
   }
 
   if (
-    !id ||
+    !_id ||
     !title ||
     !createdAt ||
     !user ||
@@ -46,7 +46,7 @@ export const Post = ({
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/posts/${id}/edit`}>
+          <Link to={`/posts/${_id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -69,7 +69,7 @@ export const Post = ({
           <h2
             className={clsx(styles.title, { [styles.titleFull]: isFullPost })}
           >
-            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
           </h2>
           <ul className={styles.tags}>
             {tags.map((name) => (
