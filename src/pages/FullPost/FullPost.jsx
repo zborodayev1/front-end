@@ -14,7 +14,7 @@ export const FullPost = () => {
     axios
       .get(`/posts/${id}`)
       .then((res) => {
-        setData(res.data.doc);
+        setData(res.data?.doc);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -25,10 +25,6 @@ export const FullPost = () => {
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />;
-  }
-
-  if (!data) {
-    return <p>Такой статьи не существует</p>;
   }
 
   return (

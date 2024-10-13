@@ -28,6 +28,7 @@ const postsSLice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    // posts
       .addCase(fetchPosts.pending, (state) => {
         state.posts.items = [];
         state.posts.status = "loading";
@@ -45,6 +46,7 @@ const postsSLice = createSlice({
         state.posts.items = [];
         state.posts.status = "error";
       })
+      // tags
       .addCase(fetchTags.pending, (state) => {
         state.tags.items = [];
         state.tags.status = "loading";

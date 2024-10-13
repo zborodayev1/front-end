@@ -1,16 +1,28 @@
 import { Avatar } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout, selectIsAuth } from "../redux/slices/auth";
+import { selectIsAuth } from "../redux/slices/auth";
 import { persistor } from '../redux/store.js';
 
+
 export const Header = () => {
-  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const onClickLogout = () => {
+  const onClickLogout = async() => {
     if (window.confirm("Вы действительно хотите выйти?")) {
-      dispatch(logout());
-      persistor.purge();
+      try {
+        if (localStorage) {
+          localStorage.removeItem('token');
+        }
+        if (persistor) {
+          await persistor.purge();
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error(error);
+        }
+      }
      
     }
   };
@@ -18,17 +30,17 @@ export const Header = () => {
     return (
       <div className="flex">
         <Link to="/add-post">
-          <button className="transition ease-in-out w-40 delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] hover:-translate-y-1">
+          <button className="transition ease-in-out w-40 delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] F]">
             Написать статью
           </button>
         </Link>
         <button
           onClick={onClickLogout}
-          className="transition ease-in-out w-24 delay-50 bg-[#ef4646] p-2 m-2 rounded-md text-[#ffff] hover:-translate-y-1 "
+          className="transition ease-in-out w-24 delay-50 bg-[#ef4646] p-2 m-2 rounded-md text-[#ffff] 6]"
         >
           Выйти
         </button>
-        <Link to="/" className="mt-2">
+        <Link to="/profile" className="mt-2">
           <Avatar src="" />
         </Link>
       </div>
@@ -38,13 +50,13 @@ export const Header = () => {
     return (
       <>
         <Link to="/login">
-          <button className="transition ease-in-out delay-50 text-[#4662EF] p-2 w-24 border border-[#4662EF] rounded-md m-2 hover:-translate-y-1 focus:bg-[#4662EF] focus:text-[#ffff] duration-200 ">
+          <button className="transition ease-in-out delay-50 text-[#4662EF] phone:p-1 phone:m-1 phone-md:p-2 phone-md:m-1 laptop:mr-8 p-2 w-24 border border-[#4662EF] rounded-md m-2 focus:bg-[#4662EF] focus:text-[#ffff] duration-200 ">
             Войти
           </button>
         </Link>
 
         <Link to="/registration">
-          <button className="transition ease-in-out delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] hover:-translate-y-1 focus:text-[#4662EF] focus:bg-[#ffff] focus:border focus:border-[#4662EF] duration-200 mr-16">
+          <button className="transition ease-in-out delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] focus:text-[#4662EF] focus:bg-[#ffff] duration-200 mr-16 phone:p-1 phone:m-1 phone-md:p-2 phone-md:m-1 laptop:mr-8">
             Создать аккаунт
           </button>
         </Link>
@@ -55,10 +67,9 @@ export const Header = () => {
     <div className="flex justify-between border border-[#dedede]">
       <>
         <div className="h-14">
-          <Link className="">
+          <Link to="/" className="">
             <button
-              className="transition ease-out delay-150 mt-3 ml-16 hover:-translate-y-1 bg-black p-2 rounded-md text-white focus:bg-[#4662EF] focus:text-[#ffff] duration-200"
-              to="/"
+              className="phone:p-1 phone:m-1 phone-md:p-2 phone-md:m-1 transition ease-out delay-150 mt-3 ml-16 bg-black p-2 rounded-md text-white focus:bg-[#4662EF] focus:text-[#ffff] focus:border-[#4662EF] duration-200"
             >
               Zakharew blog
             </button>

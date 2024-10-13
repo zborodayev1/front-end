@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchTags } from "../../components/redux/slices/posts";
 import { Grid } from "@mui/material";
+// import styles from './Home.module.scss';
 
 export const Home = () => {
   const dispath = useDispatch();
@@ -33,23 +34,24 @@ export const Home = () => {
         return null;
       }
       return (
-        <Post
-          _id={obj._id}
-          key={index}
-          title={obj.title}
-          imageUrl={obj.imageUrl}
-          user={obj.user}
-          createdAt={obj.createdAt}
-          viewsCount={obj.viewsCount}
-          commentsCount={3}
-          tags={obj.tags}
-          isEditable
-        />
+        <div key={index}>
+          <Post 
+            _id={obj._id}
+            title={obj.title}
+            imageUrl={obj.imageUrl}
+            user={obj.user}
+            createdAt={obj.createdAt}
+            viewsCount={obj.viewsCount}
+            commentsCount={3}
+            tags={obj.tags}
+            isEditable
+          />
+        </div>
       );
     });
   };
   return (
-    <div>
+    <div className="ml-2">
       <Header />
       <>
         <Tabs
@@ -64,28 +66,30 @@ export const Home = () => {
           <Grid xs={8} item>
             {renderPosts()}
           </Grid>
-          <Grid xs={4} item>
+          <div className="ml-9">
             <TagsBlock items={tags.items.tags} isLoading={isTagsLoading} />
-            <CommentsBlock
-              items={[
-                {
-                  user: {
-                    fullName: "Вася Пупкин",
-                    avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
+            <div className="mt-3">
+              <CommentsBlock
+                items={[
+                  {
+                    user: {
+                      fullName: "Вася Пупкин",
+                      avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
+                    },
+                    text: "Это тестовый комментарий",
                   },
-                  text: "Это тестовый комментарий",
-                },
-                {
-                  user: {
-                    fullName: "Иван Иванов",
-                    avatarUrl: "https://mui.com/static/images/avatar/2.jpg",
+                  {
+                    user: {
+                      fullName: "Иван Иванов",
+                      avatarUrl: "https://mui.com/static/images/avatar/2.jpg",
+                    },
+                    text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
                   },
-                  text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-                },
-              ]}
-              isLoading={false}
-            />
-          </Grid>
+                ]}
+                isLoading={false}
+              />
+            </div>
+          </div>
         </Grid>
       </>
     </div>

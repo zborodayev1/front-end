@@ -13,13 +13,13 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
-    mode: "onChange",
+    mode: "all",
   });
 
   const onSubmit = async (values) => {
@@ -47,7 +47,7 @@ export const Login = () => {
     <div>
       <Header />
       <div className="bg-[#e6e6e6] h-screen flex flex-wrap justify-center">
-        <div className="bg-[#ffff] px-16 mt-5 pt-8 w-96 h-2/3 rounded-sm">
+        <div className="bg-[#ffff] px-16 mt-5 pt-8 w-96 h-124 rounded-sm">
           <div className="flex justify-center mt-5">
             <h1 className="text-xl font-bold mb-7">Войти</h1>
           </div>
@@ -73,6 +73,7 @@ export const Login = () => {
             </div>
             <div className="flex justify-center">
               <button
+                disabled={!isValid}
                 type="submit"
                 className="border p-2 w-96 transition ease-in-out delay-50 text-[#ffff] bg-[#4662EF] hover:border-[#4662EF] rounded-md m-2 duration-200"
               >
