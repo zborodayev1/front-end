@@ -7,7 +7,7 @@ import { FullPost } from "../../pages/FullPost/FullPost";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAuthMe, selectIsAuth } from "../../components/redux/slices/auth";
-import { Profile } from "../../pages/Profile/Profile";
+// import { Profile } from "../../pages/Profile/Profile";
 
 export const Routers = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -31,7 +31,7 @@ export const Routers = () => {
             path="/add-post"
           />
           <Route element={<FullPost />} path="/posts/:id" />
-          <Route element={<Profile />} path="/me/:id" />
+          {/* <Route element={<Profile />} path="/me/:id" /> */}
         </Routes>
       </BrowserRouter>
     </>

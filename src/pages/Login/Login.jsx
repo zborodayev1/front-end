@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { Header } from "../../components/Header/Header";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAuth, selectIsAuth } from "../../components/redux/slices/auth";
+import { fetchLogin, selectIsAuth } from "../../components/redux/slices/auth";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -24,7 +24,7 @@ export const Login = () => {
 
   const onSubmit = async (values) => {
     try {
-      const data = await dispatch(fetchAuth(values));
+      const data = await dispatch(fetchLogin(values));
 
       if (!data.payload) {
         return setErr("Не удалось войти!");

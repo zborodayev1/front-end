@@ -7,45 +7,42 @@ import { persistor } from '../redux/store.js';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
-  const onClickLogout = async() => {
+  const onClickLogout = async () => {
     if (window.confirm("Вы действительно хотите выйти?")) {
       try {
-        if (localStorage) {
-          localStorage.removeItem('token');
-        }
-        if (persistor) {
-          await persistor.purge();
-        }
+        localStorage.removeItem('token');
+        localStorage.removeItem('persist:root');
+        await persistor.purge();
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error(error);
-        }
+        console.error(error);
       }
-     
     }
-  };
+  }
   const Auth = () => {
+    if (!isAuth) {
+      return null;
+    }
     return (
       <div className="flex">
         <Link to="/add-post">
-          <button className="transition ease-in-out w-40 delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] F]">
+          <button className="transition ease-in-out w-40 delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff]">
             Написать статью
           </button>
         </Link>
         <button
           onClick={onClickLogout}
-          className="transition ease-in-out w-24 delay-50 bg-[#ef4646] p-2 m-2 rounded-md text-[#ffff] 6]"
+          className="transition ease-in-out w-24 delay-50 bg-[#ef4646] p-2 m-2 rounded-md text-[#ffff]"
         >
           Выйти
         </button>
-        <Link to="/profile" className="mt-2">
-          <Avatar src="" />
-        </Link>
+        {isAuth && (
+          <Link to="/profile" className="mt-2">
+            <Avatar src={isAuth?.avatarUrl} />
+          </Link>
+        )}
       </div>
     );
-  };
+  };  
   const notAuth = () => {
     return (
       <>

@@ -4,12 +4,12 @@ import { postsReducer } from "./slices/posts";
 import { authReducer } from "./slices/auth";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import { persistConfig } from './persist'
-import { profilesReducer } from "./slices/profiles";
+// import { profilesReducer } from "./slices/profiles";
 
 const rootReducer = combineReducers({
   posts: postsReducer,
   auth: authReducer,
-  profile: profilesReducer,
+  // profile: profilesReducer,
 });
 
  

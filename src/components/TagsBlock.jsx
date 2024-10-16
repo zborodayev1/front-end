@@ -11,12 +11,10 @@ import { SideBlock } from "./SideBlock/SIdeBlock";
 // import { Link } from "react-router-dom";
 
 export const TagsBlock = ({ items, isLoading = true }) => {
-
-  return (
-    <SideBlock title="Тэги">
-      <List>
-        {(isLoading ? [...Array(5)] : items).map((name, index) => (
-          <a
+  const renderTags = () => {
+    if(isLoading) {
+      return [...Array(5)].map((name, index) => (
+        <a
             style={{ textDecoration: "none", color: "black" }}
             href={`/tags/${name}`}
             key={index}
@@ -34,7 +32,39 @@ export const TagsBlock = ({ items, isLoading = true }) => {
               </ListItemButton>
             </ListItem>
           </a>
-        ))}
+      ))
+    }
+    if (!items) {
+      return console.log('Нет данных')
+    }
+
+    return items.map((name, index) => (
+      <a
+      style={{ textDecoration: "none", color: "black" }}
+      href={`/tags/${name}`}
+      key={index}
+      >
+      <ListItem key={index} disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            <TagIcon />
+          </ListItemIcon>
+          {isLoading ? (
+            <Skeleton width={100} />
+          ) : (
+            <ListItemText primary={name} />
+          )}
+        </ListItemButton>
+      </ListItem>
+    </a>
+    ))
+  }
+  
+
+  return (
+    <SideBlock title="Тэги">
+      <List>
+      {renderTags()}
       </List>
     </SideBlock>
   );
