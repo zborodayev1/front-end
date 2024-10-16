@@ -1,8 +1,8 @@
 // import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import axios from "../../../axios";
 
-// export const fetchProfile = createAsyncThunk("posts/fetchProdile", async () => {
-//     const { data } = await axios.get("/auth/me");
+// export const fetchProfile = createAsyncThunk("posts/fetchProfile", async () => {
+//     const { data } = await axios.get("/profile");
 //     return data;
 //   });
   
@@ -12,7 +12,7 @@
 //   };
   
 //   const profilesSlice = createSlice({
-//     name: "profiles",
+//     name: "profile",
 //     initialState,
 //     reducers: {},
 //     extraReducers: (builder) => {

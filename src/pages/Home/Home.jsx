@@ -2,12 +2,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Post } from "../../components/Post/Post";
 import { TagsBlock } from "../../components/TagsBlock";
-import { CommentsBlock } from "../../components/CommentsBlock";
 import { Header } from "../../components/Header/Header";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchTags } from "../../components/redux/slices/posts";
-import { Grid } from "@mui/material";
 // import styles from './Home.module.scss';
 
 export const Home = () => {
@@ -55,49 +53,21 @@ export const Home = () => {
     });
   };
   return (
-    <div className="ml-2">
+    <div className="ml-2 ">
       <Header />
       <>
-        <Tabs
-          style={{ marginBottom: 15 }}
-          value={0}
-          aria-label="basic tabs example"
-        >
+        <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
           <Tab label="Новые" />
           <Tab label="Популярные" />
         </Tabs>
-        <Grid container spacing={4}>
-          <Grid xs={8} item>
+        <div className="flex">
+          <div className="grid" >
             {renderPosts()}
-          </Grid>
-          <Grid xs={4} item>
+          </div>
+          <div className="ml-4 mr-4 max-laptopL:w-140 max-laptop:w-124 max-tablet:ml-2 max-tablet:mr-2 max-tablet:w-72 max-mobileL:mr-1 max-mobileL:ml-1 ">
             <TagsBlock items={tags?.items?.tags} isLoading={isTagsLoading} />
-            <Grid>
-              <div className="mt-2">
-                <CommentsBlock
-                  items={[
-                    {
-                      user: {
-                        fullName: "Вася Пупкин",
-                        avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
-                      },
-                      text: "Это тестовый комментарий",
-                    },
-                    {
-                      user: {
-                        fullName: "Иван Иванов",
-                        avatarUrl: "https://mui.com/static/images/avatar/2.jpg",
-                      },
-                      text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-                    },
-                  ]}
-                  isLoading={false}
-
-                />
-                </div>
-              </Grid>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </>
     </div>
   );

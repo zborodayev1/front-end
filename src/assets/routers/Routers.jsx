@@ -7,6 +7,7 @@ import { FullPost } from "../../pages/FullPost/FullPost";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAuthMe, selectIsAuth } from "../../components/redux/slices/auth";
+import { NotFoundError } from "../Errors/NotFoundError";
 // import { Profile } from "../../pages/Profile/Profile";
 
 export const Routers = () => {
@@ -31,7 +32,8 @@ export const Routers = () => {
             path="/add-post"
           />
           <Route element={<FullPost />} path="/posts/:id" />
-          {/* <Route element={<Profile />} path="/me/:id" /> */}
+          <Route element={<NotFoundError/>} path="*" />
+          {/* <Route element={<Profile />} path="/me" /> */}
         </Routes>
       </BrowserRouter>
     </>
