@@ -6,19 +6,18 @@ import { Header } from "../../components/Header/Header";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchTags } from "../../components/redux/slices/posts";
-// import styles from './Home.module.scss';
 
 export const Home = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const { posts, tags } = useSelector((state) => state.posts);
 
   const isPostLoading = posts?.status === "loading";
   const isTagsLoading = tags?.status === "loading";
 
   useEffect(() => {
-    dispath(fetchPosts());
-    dispath(fetchTags());
-  }, [dispath]);
+    dispatch(fetchPosts());
+    dispatch(fetchTags());
+  }, [dispatch]);
 
   const renderPosts = () => {
     if (isPostLoading) {
@@ -52,6 +51,7 @@ export const Home = () => {
       );
     });
   };
+  
   return (
     <div className="ml-2 ">
       <Header />

@@ -32,7 +32,7 @@ export const Post = ({
     !_id ||
     !title ||
     !createdAt ||
-    !user ||
+    // !user ||
     !viewsCount ||
     !commentsCount ||
     !tags
