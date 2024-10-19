@@ -1,5 +1,4 @@
 import { TextField } from "@mui/material";
-import { Header } from "../../components/Header/Header";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin, selectIsAuth } from "../../components/redux/slices/auth";
@@ -45,7 +44,6 @@ export const Login = () => {
 
   return (
     <div>
-      <Header />
       <div className="bg-[#e6e6e6] h-screen flex flex-wrap justify-center">
         <div className="bg-[#ffff] px-16 mt-5 pt-8 w-96 h-124 rounded-sm">
           <div className="flex justify-center mt-5">

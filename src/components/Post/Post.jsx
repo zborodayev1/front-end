@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import clsx from "clsx";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
@@ -28,22 +27,14 @@ export const Post = ({
     return <PostSkeleton />;
   }
 
-  if (
-    !_id ||
-    !title ||
-    !createdAt ||
-    // !user ||
-    !viewsCount ||
-    !commentsCount ||
-    !tags
-  ) {
+  if (!_id || !title || !createdAt || !viewsCount || !commentsCount || !tags) {
     return null;
   }
 
   const onClickRemove = () => {};
 
   return (
-    <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
+    <div className="bg-[#ffff] shadow-lg rounded-md max-laptopL:min-w-[500px] border p-2 border-gray-400 mb-2 ">
       {isEditable && (
         <div className={styles.editButtons}>
           <Link to={`/posts/${_id}/edit`}>
@@ -58,7 +49,7 @@ export const Post = ({
       )}
       {imageUrl && (
         <img
-          className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
+          className="max-laptopL:min-w-[40px] max-laptopL:max-w-[800px] max-laptopL:min-h-[40px] max-laptopL:max-h-[850px]"
           src={imageUrl}
           alt={title}
         />
@@ -67,7 +58,7 @@ export const Post = ({
         <UserInfo {...user} additionalText={createdAt} />
         <div className={styles.indention}>
           <h2
-            className={clsx(styles.title, { [styles.titleFull]: isFullPost })}
+            className="text-2xl hover:text-[#4663EE] hover:underline duration-150"
           >
             {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
           </h2>

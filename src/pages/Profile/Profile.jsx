@@ -5,7 +5,6 @@
 // import { selectIsAuth } from "../../components/redux/slices/auth";
 // import { UserInfo } from "../../components/UserInfo/UserInfo";
 
-
 // export const Profile = () => {
 //   const dispatch = useDispatch();
 //   const isAuth = useSelector(selectIsAuth);
@@ -18,7 +17,6 @@
 //   if (!isAuth) {
 //     return <Navigate to="/" />;
 //   }
-
 
 //   return (
 //     <div>

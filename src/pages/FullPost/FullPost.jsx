@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "../../axios";
 
 export const FullPost = () => {
-  const [data, setData] = useState(null);
+  const [ data, setData ] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
@@ -21,14 +21,17 @@ export const FullPost = () => {
         console.warn(err);
         alert("Ошибка при получении статьи");
       });
-  }, []);
+  }, [id]);
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />;
   }
-
+  if (!data) {
+    return <div>Нет данных</div>;
+  }
+  
   return (
-    <>
+    <div className="m-2">
       <Post
         _id={data._id}
         title={data.title}
@@ -42,7 +45,7 @@ export const FullPost = () => {
       >
         <p>{data.text}</p>
       </Post>
-      
+
       <CommentsBlock
         items={[
           {
@@ -64,6 +67,6 @@ export const FullPost = () => {
       >
         <AddComent />
       </CommentsBlock>
-    </>
+    </div>
   );
 };

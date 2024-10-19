@@ -1,9 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import { postsReducer } from "./slices/posts";
 import { authReducer } from "./slices/auth";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import { persistConfig } from './persist'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import { persistConfig } from "./persist";
 // import { profilesReducer } from "./slices/profiles";
 
 const rootReducer = combineReducers({
@@ -12,7 +21,6 @@ const rootReducer = combineReducers({
   // profile: profilesReducer,
 });
 
- 
 const store = configureStore({
   reducer: persistReducer(persistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
@@ -27,6 +35,5 @@ const store = configureStore({
 });
 
 const persistor = persistStore(store);
-
 
 export { store, persistor };

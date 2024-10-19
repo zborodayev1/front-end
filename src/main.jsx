@@ -15,5 +15,4 @@ createRoot(document.getElementById("root")).render(
   // </StrictMode>,
 );
 
-
 persistor.persist();

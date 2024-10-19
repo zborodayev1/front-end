@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Fragment } from "react";
-
-import { SideBlock } from "./SideBlock/SIdeBlock";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
@@ -12,7 +10,8 @@ import Skeleton from "@mui/material/Skeleton";
 
 export const CommentsBlock = ({ items, children, isLoading = true }) => {
   return (
-    <SideBlock title="Комментарии">
+    <div className="bg-white p-2 border border-gray-400 m-2 rounded-md">
+      <p className="text-xl">Комментарии</p>
       <List>
         {(isLoading ? [...Array(5)] : (items ?? [])).map((obj, index) => (
           <Fragment key={index}>
@@ -41,6 +40,6 @@ export const CommentsBlock = ({ items, children, isLoading = true }) => {
         ))}
       </List>
       {children}
-    </SideBlock>
+    </div>
   );
 };

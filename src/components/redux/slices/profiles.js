@@ -5,12 +5,12 @@
 //     const { data } = await axios.get("/profile");
 //     return data;
 //   });
-  
+
 //   const initialState = {
 //     data: null,
 //     status: "loading",
 //   };
-  
+
 //   const profilesSlice = createSlice({
 //     name: "profile",
 //     initialState,
@@ -31,5 +31,5 @@
 //         });
 //     },
 //   });
-  
+
 //   export const profilesReducer = profilesSlice.reducer

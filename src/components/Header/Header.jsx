@@ -1,21 +1,19 @@
 import { Avatar } from "@mui/material";
-import {  useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectIsAuth } from "../redux/slices/auth";
-import { persistor } from '../redux/store.js';
-
+import { selectIsAuth, logout } from "../redux/slices/auth";
+import { persistor } from "../redux/store.js";
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const onClickLogout = async () => {
-      try {
-        localStorage.removeItem('token');
-        localStorage.removeItem('persist:root');
-        await persistor.purge();
-      } catch (error) {
-        console.error(error);
-      }
+    if (window.confirm("Вы действительно хотите выйти?")) {
+      dispatch(logout());
+      localStorage.removeItem("token");
+      persistor.purge();
     }
+  };
   const Auth = () => {
     if (!isAuth) {
       return null;
@@ -34,13 +32,12 @@ export const Header = () => {
           Выйти
         </button>
 
-          <Link to="/profile" className="mt-2">
-            <Avatar />
-          </Link>
-
+        <Link to="/profile" className="mt-2">
+          <Avatar />
+        </Link>
       </div>
     );
-  };  
+  };
   const notAuth = () => {
     return (
       <>
@@ -51,7 +48,7 @@ export const Header = () => {
         </Link>
 
         <Link to="/registration">
-          <button className="max-mobileL:h-8 max-mobileL:text-center max-mobileL:p-0 max-mobileL:text-sm transition ease-in-out delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] focus:text-[#4662EF] focus:bg-[#ffff] duration-200 mr-16">
+          <button className="max-mobileL:h-8 max-mobileL:text-center max-mobileL:p-0 max-mobileL:text-sm transition ease-in-out delay-50 bg-[#4662EF] p-2 m-2 rounded-md text-[#ffff] focus:text-[#4662EF] focus:border focus:border-[#4662EF] focus:bg-[#ffff] duration-200 mr-16">
             Создать аккаунт
           </button>
         </Link>
@@ -60,21 +57,19 @@ export const Header = () => {
   };
   return (
     <div>
-    <div className="flex justify-between">
-      <>
-        <div className="h-14">
-          <Link to="/" className="">
-            <button
-              className="max-mobileL:ml-2 max-mobileL:h-8 max-mobileL:text-center max-mobileL:p-0 max-mobileL:text-sm max-mobileL:w-28 transition ease-out delay-150 mt-3 ml-16 bg-black p-2 rounded-md text-white focus:bg-[#4662EF] focus:text-[#ffff] focus:border-[#4662EF] duration-200"
-            >
-              Zakharew blog
-            </button>
-          </Link>
-        </div>
-      </>
-      <div>{isAuth ? Auth() : notAuth()}</div>
-    </div>
-      <div className='border border-[#dedede] h-0 mr-2 ml-2'></div>
+      <div className="flex justify-between">
+        <>
+          <div className="h-14">
+            <Link to="/" className="">
+              <button className="max-mobileL:ml-2 max-mobileL:h-8 max-mobileL:text-center max-mobileL:p-0 max-mobileL:text-sm max-mobileL:w-28 transition ease-out delay-150 mt-3 ml-16 bg-black p-2 rounded-md text-white focus:bg-[#4662EF] focus:text-[#ffff] focus:border-[#4662EF] duration-200">
+                Zakharew blog
+              </button>
+            </Link>
+          </div>
+        </>
+        <div>{isAuth ? Auth() : notAuth()}</div>
+      </div>
+      <div className="border border-[#dedede] h-0 mr-2 ml-2"></div>
     </div>
   );
 };

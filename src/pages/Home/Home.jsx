@@ -2,7 +2,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Post } from "../../components/Post/Post";
 import { TagsBlock } from "../../components/TagsBlock";
-import { Header } from "../../components/Header/Header";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchTags } from "../../components/redux/slices/posts";
@@ -10,6 +9,7 @@ import { fetchPosts, fetchTags } from "../../components/redux/slices/posts";
 export const Home = () => {
   const dispatch = useDispatch();
   const { posts, tags } = useSelector((state) => state.posts);
+  const userData = useSelector((state) => state.auth.data);
 
   const isPostLoading = posts?.status === "loading";
   const isTagsLoading = tags?.status === "loading";
@@ -45,25 +45,26 @@ export const Home = () => {
             viewsCount={obj.viewsCount}
             commentsCount={3}
             tags={obj.tags}
-            isEditable
+            isEditable={userData?._id === obj?.user?._id}
           />
         </div>
       );
     });
   };
-  
+
   return (
     <div className="ml-2 ">
-      <Header />
       <>
-        <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
+        <Tabs
+          style={{ marginBottom: 15 }}
+          value={0}
+          aria-label="basic tabs example"
+        >
           <Tab label="Новые" />
           <Tab label="Популярные" />
         </Tabs>
         <div className="flex">
-          <div className="grid" >
-            {renderPosts()}
-          </div>
+          <div className="grid">{renderPosts()}</div>
           <div className="ml-4 mr-4 max-laptopL:w-140 max-laptop:w-124 max-tablet:ml-2 max-tablet:mr-2 max-tablet:w-72 max-mobileL:mr-1 max-mobileL:ml-1 ">
             <TagsBlock items={tags?.items?.tags} isLoading={isTagsLoading} />
           </div>
